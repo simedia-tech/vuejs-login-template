@@ -1,0 +1,57 @@
+<!doctype html>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Vue.js Login</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+<link rel="stylesheet" href="./styles.css">
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<div id="app">
+  <div id="login">
+    <div id="description">
+      <h1>Login</h1>
+      <p>By logging in you agree to the ridiculously long terms that you didn't bother to read.</p>
+    </div>
+    <div id="form">
+      <form @submit="doLogin">
+        <label for="email">Email</label>
+        <input type="text" id="email" v-model="email" placeholder="me@example.com" autocomplete="off">
+
+        <label for="password">Password</label>&nbsp;
+        <i class="fas" :class="[passwordIcon]" @click="hidePassword = !hidePassword"></i>
+        <input :type="passwordType" id="password" v-model="password" placeholder="**********">
+
+        <button type="submit">Log in</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      email: '',
+      password: '',
+      hidePassword: true
+    },
+    computed: {
+      passwordType() {
+        return this.hidePassword ? 'password' : 'text'
+      },
+      passwordIcon() {
+        return this.hidePassword ? 'fa-eye' : 'fa-eye-slash'
+      }
+    },
+    methods: {
+      doLogin() {
+        alert('Not implemented yet :O')
+      }
+    }
+  })
+</script>
