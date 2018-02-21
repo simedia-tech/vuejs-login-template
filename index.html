@@ -18,7 +18,7 @@
       <p>By logging in you agree to the ridiculously long terms that you didn't bother to read.</p>
     </div>
     <div id="form">
-      <form @submit="doLogin">
+      <form @submit.prevent="doLogin">
         <label for="email">Email</label>
         <input type="text" id="email" v-model="email" placeholder="me@example.com" autocomplete="off">
 
