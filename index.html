@@ -3,13 +3,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Vue.js Login</title>
+<title>Vue.js 3 Login (with Composition API)</title>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
 <link rel="stylesheet" href="./styles.css">
 
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
 
 <div id="app">
   <div id="login">
@@ -20,11 +19,11 @@
     <div id="form">
       <form @submit.prevent="doLogin">
         <label for="email">Email</label>
-        <input type="text" id="email" v-model="email" placeholder="me@example.com" autocomplete="off">
+        <input type="text" id="email" v-model="email" placeholder="elon@musk.io" autocomplete="off">
 
         <label for="password">Password</label>&nbsp;
-        <i class="fas" :class="[passwordIcon]" @click="hidePassword = !hidePassword"></i>
-        <input :type="passwordType" id="password" v-model="password" placeholder="**********">
+        <i class="fas" :class="[passwordFieldIcon]" @click="hidePassword = !hidePassword"></i>
+        <input :type="passwordFieldType" id="password" v-model="password" placeholder="**********">
 
         <button type="submit">Log in</button>
       </form>
@@ -33,25 +32,27 @@
 </div>
 
 <script>
-  const vm = new Vue({
-    el: '#app',
-    data: {
-      email: '',
-      password: '',
-      hidePassword: true
-    },
-    computed: {
-      passwordType() {
-        return this.hidePassword ? 'password' : 'text'
-      },
-      passwordIcon() {
-        return this.hidePassword ? 'fa-eye' : 'fa-eye-slash'
-      }
-    },
-    methods: {
-      doLogin() {
-        alert('Not implemented yet :O')
+  Vue.createApp({
+    setup() {
+      const email = Vue.ref("");
+      const hidePassword = Vue.ref(true);
+      const password = Vue.ref("");
+
+      const passwordFieldIcon = Vue.computed(() => hidePassword.value ? "fa-eye" : "fa-eye-slash");
+      const passwordFieldType = Vue.computed(() => hidePassword.value ? "password" : "text");
+
+      const doLogin = () => alert("Not implemented yet :O");
+
+      return {
+        email,
+        hidePassword,
+        password,
+
+        passwordFieldIcon,
+        passwordFieldType,
+
+        doLogin
       }
     }
-  })
+  }).mount("#app");
 </script>
